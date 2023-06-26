@@ -1,20 +1,19 @@
 const dotenv = require("dotenv");
 const express = require("express");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const app = express();
 
-const db =
-  "mongodb+srv://vikassahani1110:z29OCPxXAOHGbT2j@cluster0.yn7fin3.mongodb.net/mernstack?retryWrites=true&w=majoritymongodb+srv://<username>:<password>@cluster0.yn7fin3.mongodb.net/?retryWrites=true&w=majority";
+dotenv.config({ path: "./config.env" });
 
-mongoose
-  .connect(db)
-  .then(() => {
-    console.log(`connection successful`);
-  })
-  .catch((err) => console.log(`no connection`));
+require("./db/conn");
+app.use(express.json());
+//we link the router files to make our route easy
+app.use(require("./router/auth"));
+
+const port = process.env.PORT;
 
 app.get("/", (req, res) => {
-  res.send(`Hello world from the server`);
+  res.send(`Hello world from the app.js server`);
 });
 
 app.get("/about", (req, res) => {
@@ -32,7 +31,10 @@ app.get("/signin", (req, res) => {
 app.get("/signup", (req, res) => {
   res.send(`Hello signup world from the `);
 });
+app.post("/register", (req, res) => {
+  console.log("from app.js", req.body);
+});
 
-app.listen(3000, () => {
-  console.log(`server is running at port No. 3000`);
+app.listen(port, () => {
+  console.log(`server is running at port No. ${port}`);
 });
