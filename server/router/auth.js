@@ -36,4 +36,27 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/signin", async (req, res) => {
+  // console.log(req.body);
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      //if email or password are wrong then fill the form again
+      return res.status(400).json({ error: "plz fill the data" });
+    }
+    const userLogin = await User.findOne({ email: email });
+    console.log(userLogin);
+
+    if (!userLogin) {
+      return res.status(400).json({ error: "Email already Exist" });
+    } else {
+      res.status(201).json({ message: "user registered successfuly" });
+    }
+    // const user = new User({ name, email, phone, work, password, cpassword });
+    // await user.save();
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
