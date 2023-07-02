@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../model/userSchema");
 
+require("../db/conn");
+
 router.get("/", (req, res) => {
   res.send(`Hello world from the server router js`);
   console.log("hello world");
@@ -20,6 +22,10 @@ router.post("/register", async (req, res) => {
 
   try {
     const userExist = await User.findOne({ email: email });
+    if (userExist) {
+      //user aleardy exist then send error
+      return res.status(422).json({ error: "Email already Exist " });
+    }
     //if user is not exist, means they haven't register prior so we need to create there document in the collection
     const user = new User({ name, email, phone, work, password, cpassword }); //19.10
 
