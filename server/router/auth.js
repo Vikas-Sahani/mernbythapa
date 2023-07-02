@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const express = require("express");
 const router = express.Router();
 const User = require("../model/userSchema");
@@ -46,6 +47,7 @@ router.post("/register", async (req, res) => {
 router.post("/signin", async (req, res) => {
   // console.log(req.body);
   try {
+    let token;
     const { email, password } = req.body;
     if (!email || !password) {
       //if email or password are wrong then fill the form again
@@ -56,6 +58,9 @@ router.post("/signin", async (req, res) => {
 
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
+
+      token = await userLogin.generateAuthToken();
+      console.log("from auth.js -> ", token);
 
       if (!isMatch) {
         return res.status(400).json({ error: "Invalid Cridentials due to P" });
