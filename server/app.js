@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
+  res.cookie("test", "Vikas");
   res.send(`Hello about world from the server`);
 });
 
