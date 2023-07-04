@@ -84,6 +84,7 @@ function Register() {
             className="border-b-2"
             placeholder="Confirm Password"
           />
+          <button>Submit</button>
         </form>
       </div>
     </div>
