@@ -44,14 +44,16 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/signin", async (req, res) => {
+router.post("/login", async (req, res) => {
   // console.log(req.body);
   try {
     let token;
     const { email, password } = req.body;
     if (!email || !password) {
       //if email or password are wrong then fill the form again
-      return res.status(400).json({ error: "plz fill the data" });
+      return res
+        .status(400)
+        .json({ error: "plz fill the correct infromation" });
     }
     const userLogin = await User.findOne({ email: email });
     // console.log(userLogin);
