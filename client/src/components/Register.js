@@ -2,6 +2,39 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const inputFeilds = [
+    {
+      name: "name",
+      type: "text",
+      placeholder: "Your Name",
+    },
+    {
+      name: "email",
+      type: "email",
+      placeholder: "Your Email",
+    },
+    {
+      name: "phone",
+      type: "number",
+      placeholder: "Mobile Number",
+    },
+    {
+      name: "work",
+      type: "text",
+      placeholder: "Your Profession",
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Your Password",
+    },
+    {
+      name: "cpassword",
+      type: "password",
+      placeholder: "Confirm Password",
+    },
+  ];
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -31,14 +64,7 @@ function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        work,
-        password,
-        cpassword,
-      }),
+      body: JSON.stringify({ name, email, phone, work, password, cpassword }),
     });
 
     const data = await res.json(); // 11.50-> pending status dikhhti, so we don't see pending status so we have used this
@@ -50,7 +76,7 @@ function Register() {
     } else {
       window.alert(" Registration successful");
       console.log("Registration successful");
-      navigate("/login"); //14.00
+      navigate("/login"); //v5 has history -> 14.00
     }
   };
 
@@ -61,66 +87,23 @@ function Register() {
       <div className="ml-10">
         <h1>Registeration of User</h1>
         <form method="POST">
-          {console.log(inpName)}
-          <input
-            type="text"
-            name="name"
-            value={inpValue}
-            onChange={handleInputs}
-            className="border-b-2"
-            placeholder="Your Name"
-          />
-          <br />
-          <br />
-          <input
-            type="email"
-            name="email"
-            value={inpValue}
-            onChange={handleInputs}
-            className="border-b-2"
-            placeholder="Your Email"
-          />
-          <br />
-          <br />
-          <input
-            type="number"
-            name="phone"
-            value={inpValue}
-            onChange={handleInputs}
-            className="border-b-2"
-            placeholder="Mobile Number"
-          />
-          <br />
-          <br />
-          <input
-            type="text"
-            name="work"
-            value={inpValue}
-            onChange={handleInputs}
-            className="border-b-2"
-            placeholder="Your Profession"
-          />
-          <br />
-          <br />
-          <input
-            type="password"
-            name="password"
-            value={inpValue}
-            onChange={handleInputs}
-            className="border-b-2"
-            placeholder="Password"
-          />
-          <br />
-          <br />
-          <input
-            type="password"
-            name="cpassword"
-            value={inpValue}
-            onChange={handleInputs}
-            className="border-b-2"
-            placeholder="Confirm Password"
-          />
-          <br /> <br />
+          {inputFeilds.map((inp) => {
+            return (
+              <>
+                <input
+                  type={inp.type}
+                  name={inp.name}
+                  placeholder={inp.placeholder}
+                  value={inpValue}
+                  onChange={handleInputs}
+                  className="border-b-2"
+                />
+                <br />
+                <br />
+              </>
+            );
+          })}
+
           <button
             onClick={PostData}
             className="bg-blue-800 text-blue-50 w-20 p-2 rounded-full hover:bg-black duration-700"
