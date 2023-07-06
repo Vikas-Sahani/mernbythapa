@@ -12,14 +12,10 @@ app.use(require("./router/auth"));
 
 const port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send(`Hello world from the app.js server`);
-});
-
-app.get("/about", (req, res) => {
-  res.cookie("test", "Vikas");
-  res.send(`Hello about world from the server`);
-});
+// app.get("/about", (req, res) => {
+//   res.cookie("test", "Vikas");
+//   res.send(`Hello about world from the server`);
+// });
 
 app.get("/contact", (req, res) => {
   res.send(`Hello contact world from the `);

@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../model/userSchema");
 const bcrypt = require("bcryptjs");
+const authenticate = require("../middleware/authenticate");
 
 require("../db/conn");
 
@@ -78,6 +79,12 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+
+  // about us ka page
+  router.get("/about", authenticate, (req, res) => {
+    console.log("hello my about");
+    res.send(`Hello about world from the server`);
+  });
 });
 
 module.exports = router;
