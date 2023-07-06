@@ -83,7 +83,7 @@ router.post("/login", async (req, res) => {
   // about us ka page
   router.get("/about", authenticate, (req, res) => {
     console.log("hello my about");
-    res.send(`Hello about world from the server`);
+    res.send(res.send(req.rootUser));
   });
 });
 
