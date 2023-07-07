@@ -1,11 +1,18 @@
 const dotenv = require("dotenv");
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const authenticate = require("./middleware/authenticate");
 // const mongoose = require("mongoose");
+
 const app = express();
 
 dotenv.config({ path: "./config.env" });
 
 require("./db/conn");
+
+app.use(cookieParser());
+app.use(authenticate);
+
 app.use(express.json());
 //we link the router files to make our route easy
 app.use(require("./router/auth"));

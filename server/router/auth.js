@@ -65,10 +65,18 @@ router.post("/login", async (req, res) => {
       token = await userLogin.generateAuthToken();
       console.log("from auth.js -> ", token);
 
+      //storing the token(named -> jwtoken) in side browser
+      res.cookie("jwtoken", token, {
+        //2.30
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true, //5.10
+      });
+      console.log("from auth.js -> cookie has been stored inside browser");
+
       if (!isMatch) {
         return res.status(400).json({ error: "Invalid Cridentials due to P" });
       } else {
-        res.status(201).json({ message: "user registered successfuly" });
+        res.status(201).json({ message: "user login successfuly" });
       }
     } else {
       res.status(400).json({ error: "Invalid Cridentials due to E" });

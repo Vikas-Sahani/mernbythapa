@@ -4,7 +4,10 @@ const User = require("../model/userSchema");
 const Authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.jwtoken; //getting the stored token
+    console.log(token);
+
     const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+    console.log(verifyToken);
 
     const rootUser = await User.findOne({
       _id: verifyToken._id,
@@ -19,6 +22,7 @@ const Authenticate = async (req, res, next) => {
     //if user is find
     req.token = token;
     req.rootUser = rootUser;
+    console.log("rootuser", req.rootUser);
     req.userId = rootUser._id;
 
     next();

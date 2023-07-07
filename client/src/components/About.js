@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import vikas from "../image/PassportSize VIkas.png";
 import { useNavigate } from "react-router-dom";
 
 function About() {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
 
   const callAboutPage = async () => {
     try {
@@ -18,6 +19,7 @@ function About() {
 
       const data = await res.json();
       console.log(data);
+      setUserData(data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -28,6 +30,7 @@ function About() {
       navigate("/login"); //if user is not authentic then redirect them to login page
     }
   };
+
   useEffect(() => {
     callAboutPage();
   }, []);
@@ -47,10 +50,10 @@ function About() {
           <div className="">
             <p>YouTuber</p>
             <p>Instagram</p>
-            <p>Vikas</p>
+            <p>{userData.name}</p>
             <p>Website GitHub MERN Dev</p>
             <p>Figma</p>
-            <p>Software Engeeneer</p>
+            <p>{userData.work}</p>
           </div>
         </div>
 
@@ -78,23 +81,23 @@ function About() {
               <div className="mt-5">
                 <p className="grid grid-cols-2 ">
                   <span>User ID</span>
-                  <span>787888878877789</span>
+                  <span>{userData._id}</span>
                 </p>
                 <p className="grid grid-cols-2">
                   <span>Name</span>
-                  <span>Vikas</span>{" "}
+                  <span>{userData.name}</span>
                 </p>
                 <p className="grid grid-cols-2">
                   <span>Email</span>
-                  <span>vk@gmail.com</span>
+                  <span>{userData.email}</span>
                 </p>
                 <p className="grid grid-cols-2">
                   <span>Phone</span>
-                  <span>7894561302</span>
+                  <span>{userData.phone}</span>
                 </p>
                 <p className="grid grid-cols-2">
                   <span>Profession</span>
-                  <span>web Developer</span>
+                  <span>{userData.work}</span>
                 </p>
               </div>
             </div>
