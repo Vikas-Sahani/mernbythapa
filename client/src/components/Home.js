@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Home() {
+  const [username, setUserNme] = useState("");
+  const [show, setShow] = useState(false);
+
+  const userHomePage = async () => {
+    try {
+      const res = await fetch("/getData", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setUserNme(data.name);
+      setShow(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    userHomePage();
+  }, []);
+
   return (
     <div className="mt-20">
       <p>Welcom</p>
-      <h1>We are the Mern Developer</h1>
+      <h1>{username}</h1>
+      <h1>{show ? "happy to see you back" : "We are the Mern Developer"}</h1>
     </div>
   );
 }
