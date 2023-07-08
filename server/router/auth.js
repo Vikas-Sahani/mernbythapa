@@ -71,7 +71,6 @@ router.post("/login", async (req, res) => {
         expires: new Date(Date.now() + 25892000000),
         httpOnly: true, //5.10
       });
-      console.log("from auth.js -> cookie has been stored inside browser");
 
       if (!isMatch) {
         return res.status(400).json({ error: "Invalid Cridentials due to P" });
@@ -87,12 +86,18 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
 
-  // about us ka page
-  router.get("/about", authenticate, (req, res) => {
-    console.log("hello my about");
-    res.send(res.send(req.rootUser));
-  });
+// about us ka page
+router.get("/about", authenticate, (req, res) => {
+  console.log("hello my about");
+  res.send(res.send(req.rootUser));
+});
+
+// get user data for contact us & home page
+router.get("/getdata", authenticate, (req, res) => {
+  console.log("hello my contact-us");
+  res.send(res.send(req.rootUser));
 });
 
 module.exports = router;
