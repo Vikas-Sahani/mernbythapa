@@ -91,13 +91,45 @@ router.post("/login", async (req, res) => {
 // about us ka page
 router.get("/about", authenticate, (req, res) => {
   console.log("hello my about");
-  res.send(res.send(req.rootUser));
+  res.send(req.rootUser);
 });
 
 // get user data for contact us & home page
 router.get("/getdata", authenticate, (req, res) => {
   console.log("hello my contact-us");
-  res.send(res.send(req.rootUser));
+  res.send(req.rootUser);
+});
+
+//contact us page's router
+router.post("/contact", authenticate, async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+
+    res.json({ msg: message });
+    //this is used here to check that is msg comming from frontend or not?
+
+    if (!name || !email || !phone || !message) {
+      console.log("error in contact form");
+      return res.json({ error: "pls fill the contact form" });
+    }
+
+    const userContact = await User.findOne({ _id: req.userId });
+
+    if (userContact) {
+      const userMessage = await userContact.addMessage(
+        name,
+        email,
+        phone,
+        message
+      );
+      // now we need to define this addMessage() method in userSchema.js
+
+      await userContact.save();
+      res.status(201).json({ message: "user Contact-us successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

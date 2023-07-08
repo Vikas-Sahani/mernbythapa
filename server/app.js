@@ -9,7 +9,7 @@ const app = express();
 dotenv.config({ path: "./config.env" });
 
 require("./db/conn");
-
+//below 2 lines for running the perfectly our middelware(authenticate) & these 2 should always before the app.use(express.json())
 app.use(cookieParser());
 app.use(authenticate);
 
@@ -24,9 +24,9 @@ const port = process.env.PORT;
 //   res.send(`Hello about world from the server`);
 // });
 
-app.get("/contact", (req, res) => {
-  res.send(`Hello contact world from the `);
-});
+// app.get("/contact", (req, res) => {
+//   res.send(`Hello contact world from the `);
+// });
 
 app.get("/signin", (req, res) => {
   res.send(`Hello signin world from the `);
