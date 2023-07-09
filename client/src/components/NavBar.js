@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiFillHome, AiFillPhone } from "react-icons/ai";
 import { FcAbout } from "react-icons/fc";
 import { BiSolidRegistered } from "react-icons/bi";
-import { FaKey } from "react-icons/fa";
+import { AiFillUnlock, AiFillLock } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {
@@ -11,7 +11,8 @@ const Nav = () => {
     { name: <AiFillPhone />, link: "/contact" },
     { name: <FcAbout />, link: "/about" },
     { name: <BiSolidRegistered />, link: "/register" },
-    { name: <FaKey />, link: "/login" },
+    { name: <AiFillUnlock />, link: "/login" },
+    { name: <AiFillLock />, link: "/logout" },
   ];
   let [open, setOpen] = useState(false);
   return (
