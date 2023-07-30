@@ -27,8 +27,8 @@ function Home() {
   }, []);
 
   return (
-    <div className="mt-20">
-      <p>Welcom</p>
+    <div className="mt-20 flex justify-center flex-col text-center">
+      <p>Welcome</p>
       <h1>{username}</h1>
       <h1>{show ? "happy to see you back" : "We are the Mern Developer"}</h1>
     </div>

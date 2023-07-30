@@ -20,6 +20,7 @@ function About() {
       const data = await res.json();
       console.log(data);
       setUserData(data);
+      console.log(userData);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -33,6 +34,7 @@ function About() {
 
   useEffect(() => {
     callAboutPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <form

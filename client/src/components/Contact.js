@@ -33,6 +33,7 @@ function Contact() {
 
   useEffect(() => {
     userContactUs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // we are storing data in states

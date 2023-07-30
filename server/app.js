@@ -17,7 +17,7 @@ app.use(express.json());
 //we link the router files to make our route easy
 app.use(require("./router/auth"));
 
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 // app.get("/about", (req, res) => {
 //   res.cookie("test", "Vikas");
