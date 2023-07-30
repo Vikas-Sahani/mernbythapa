@@ -81,11 +81,11 @@ function Register() {
   };
 
   return (
-    <div className="mt-20">
+    <div className="mt-40 flex justify-center">
       <br />
       <br />
       <div className="ml-10">
-        <h1>Registeration of User</h1>
+        <h1 className="text-6xl mb-10">Registeration of User</h1>
         <form method="POST">
           {inputFeilds.map((inp) => {
             return (

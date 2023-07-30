@@ -42,10 +42,10 @@ function Login() {
     }
   };
   return (
-    <div className="mt-20">
+    <div className="mt-40 flex justify-center">
       <br />
       <div className="ml-10">
-        <h1>Login</h1>
+        <h1 className="text-7xl mb-10">Login</h1>
         <form method="POST">
           <br />
           <input
@@ -68,7 +68,7 @@ function Login() {
           <br />
           <button
             onClick={PostData}
-            className="bg-blue-700 text-white rounded-full w-20"
+            className="bg-blue-800 text-blue-50 w-20 p-2 rounded-full hover:bg-black duration-700"
           >
             Login{" "}
           </button>

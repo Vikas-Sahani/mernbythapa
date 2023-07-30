@@ -25,11 +25,7 @@ function Logout() {
       });
   });
   return (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
+    <div className="mt-40 flex justify-center text-7xl">
       <h1> Logout page</h1>
     </div>
   );
